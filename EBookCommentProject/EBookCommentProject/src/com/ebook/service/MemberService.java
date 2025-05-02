@@ -25,8 +25,10 @@ public class MemberService {
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		member.setRegDate(now.format(formatter));
+		
+		memberDAO.insertMember(member);
 
-		return memberDAO.insertMember(member);
+		return memberDAO.insertMember(member)!=null;
 	}
 
 	// 로그인 처리

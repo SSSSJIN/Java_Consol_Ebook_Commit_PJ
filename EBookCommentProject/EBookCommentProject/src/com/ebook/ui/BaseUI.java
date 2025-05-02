@@ -7,11 +7,11 @@ import com.ebook.service.MemberService;
 public abstract class BaseUI implements EbookUI {
 
     protected Scanner sc;
-    protected MemberService boardService;
+    protected MemberService memberService;
 
-    public BaseUI(MemberService boardService) {
+    public BaseUI() {
         this.sc = new Scanner(System.in);
-        this.boardService = boardService;
+        this.memberService = new MemberService();
     }
 
     protected String scanStr(String msg) {

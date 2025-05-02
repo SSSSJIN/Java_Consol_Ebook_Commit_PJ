@@ -5,17 +5,18 @@ import com.ebook.exception.ChoiceOutOfBoundException;
 import com.ebook.service.MemberService;
 
 public class MainMenuUI extends BaseUI {
+	
+	static String choice;
 
-    public MainMenuUI(MemberService memberService) {
-        super(memberService);
+    public MainMenuUI() {
+    	choice = "1";
     }
-
+    
     @Override
     public void execute() throws Exception {
 
 		while (true) {
 			try {
-				String choice = displayMenu();//뭔 새로운 메서드??
 				EbookUI ui = null;
 
 				switch (choice) {
