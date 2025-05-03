@@ -6,17 +6,24 @@ import com.ebook.service.MemberService;
 
 public class MainMenuUI extends BaseUI {
 	
-	static String choice;
-
-    public MainMenuUI() {
-    	choice = "1";
+	public MainMenuUI(MemberService memberService) {
+        super(memberService); // ✅ BaseUI에 service 전달
     }
-    
+	
     @Override
     public void execute() throws Exception {
-
+    	
 		while (true) {
 			try {
+				  // ✅ 메뉴 출력 추가
+				System.out.println("\n📚 === 메인 메뉴 ===");
+                System.out.println("1. 전체 게시글 조회");
+                System.out.println("2. 보관함 진입");
+                System.out.println("3. 로그인/회원가입");
+                System.out.println("0. 프로그램 종료");
+
+                String choice = scanStr(">> 메뉴를 선택하세요 : ");
+                
 				EbookUI ui = null;
 
 				switch (choice) {

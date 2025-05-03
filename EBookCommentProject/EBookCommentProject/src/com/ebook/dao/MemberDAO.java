@@ -55,7 +55,7 @@ public class MemberDAO {
 		try {
 			conn = new ConnectionFactory().getConnection();
 
-			String sql = "INSERT INTO T_MEMBER (email, password, nickname, regdate) VALUES (?, ?, ?, SYSDATE)";
+			String sql = "INSERT INTO T_MEMBER (no, email, password, nickname, regdate) VALUES (?, ?, ?, SYSDATE)";
 			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, member.getEmail());
 			pstmt.setString(2, member.getPassword());

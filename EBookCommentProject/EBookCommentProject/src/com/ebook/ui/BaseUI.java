@@ -3,15 +3,16 @@ package com.ebook.ui;
 import java.util.Scanner;
 
 import com.ebook.service.MemberService;
+import com.ebook.vo.MemberVO;
 
 public abstract class BaseUI implements EbookUI {
 
     protected Scanner sc;
     protected MemberService memberService;
 
-    public BaseUI() {
+    public BaseUI(MemberService memberService) {
         this.sc = new Scanner(System.in);
-        this.memberService = new MemberService();
+        this.memberService = memberService;
     }
 
     protected String scanStr(String msg) {

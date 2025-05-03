@@ -12,10 +12,10 @@ public class MemberService {
 
 	public MemberService() {
 		memberDAO = new MemberDAO();
-	}
-
+	}	
+	
 	// 회원 가입
-	public boolean registerMember(String email, String password, String nickname) {
+	public boolean RegisterMember(String email, String password, String nickname) {
 		MemberVO member = new MemberVO();
 		member.setEmail(email);
 		member.setPassword(password);
@@ -54,5 +54,6 @@ public class MemberService {
 	public boolean deleteMember(int no) {
 		return memberDAO.deleteMember(no);
 	}
+
 }
 
