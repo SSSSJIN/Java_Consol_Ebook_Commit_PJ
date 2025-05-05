@@ -3,6 +3,7 @@ import com.ebook.service.MemberService;
 import com.ebook.vo.MemberVO;
 
 public class MemberLoginMenuUI extends BaseUI {
+	private MemberService memberService = new MemberService();
 
 	public MemberLoginMenuUI(MemberService memberService) {
 		super(memberService);
