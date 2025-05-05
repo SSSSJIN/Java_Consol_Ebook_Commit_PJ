@@ -30,7 +30,7 @@ public class MainMenuUI extends BaseUI {
 						ui = new SearchAllUI();    // 전체 게시글 조회
 						break;
 					case "2":
-						ui = new StorageUI();      // 보관함 진입
+						ui = new StorageUI(memberService);      // 보관함 진입
 						break;
 					case "0":
 						ui = new ExitUI();         // 프로그램 종료

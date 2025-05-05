@@ -10,8 +10,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-// DB에서 책 정보를 조회하는 클래스
+// DB에서 책 정보 조회
 public class BookDAO {
+
 	public List<BookVO> getAllBooks() {
 		List<BookVO> books = new ArrayList<>();
 		Connection conn = null;
@@ -68,4 +69,61 @@ public class BookDAO {
 		}
 		return book;
 	}
+
+	// 제목으로 책 검색
+	public List<BookVO> searchBooksByTitle(String keyword) {
+		List<BookVO> books = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new ConnectionFactory().getConnection();
+			String sql = "SELECT book_id, title, author, description FROM ebook_books WHERE title LIKE ? ORDER BY book_id";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%");
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				BookVO book = new BookVO(
+					rs.getInt("book_id"),
+					rs.getString("title"),
+					rs.getString("author"),
+					rs.getString("description")
+				);
+				books.add(book);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCClose.close(conn, pstmt, rs);
+		}
+		return books;
+	}
+
+	// 특정 book_id의 에피소드 전체 조회
+	public List<String> selectEpisodesByBookId(int bookId) {
+		List<String> episodes = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new ConnectionFactory().getConnection();
+			String sql = "SELECT episode_number, content FROM book_episode WHERE book_id = ? ORDER BY episode_number";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int episodeNumber = rs.getInt("episode_number");
+				String content = rs.getString("content");
+				episodes.add("Episode " + episodeNumber + "\n" + content);
+			}
+		} catch (Exception e) {
+			System.out.println("에피소드 조회 실패: " + e.getMessage());
+		} finally {
+			JDBCClose.close(conn, pstmt, rs);
+		}
+		return episodes;
+	}
 }
+

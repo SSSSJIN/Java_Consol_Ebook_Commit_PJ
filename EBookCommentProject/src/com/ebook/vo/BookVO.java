@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 // 책 정보를 담는 클래스 (VO: Value Object)
 public class BookVO implements Serializable {
-	private int bookId;          // 책 고유 ID
+	private int bookId;          // 책 고유 ID = PK키
 	private String title;        // 책 제목
 	private String author;       // 저자
 	private String description;  // 책 설명
