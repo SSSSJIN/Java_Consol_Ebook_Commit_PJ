@@ -7,6 +7,7 @@ import com.ebook.vo.BookVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,5 +130,35 @@ public class BookDAO {
         }
         return episodes;
     }
+    
+    public BookVO getBookDetail(int bookId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BookVO book = null;
+
+		try {
+			conn = new ConnectionFactory().getConnection();
+			String sql = "SELECT book_id, title, author, genre, description FROM ebook_books WHERE book_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bookId);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				book = new BookVO(
+					rs.getInt("book_id"),
+					rs.getString("title"),
+					rs.getString("author"),
+					rs.getString("genre"),
+					rs.getString("description")
+				);
+			}
+		} catch (SQLException e) {
+			System.out.println("책 상세 조회 실패: " + e.getMessage());
+		} finally {
+			JDBCClose.close(conn, pstmt, rs);
+		}
+		return book;
+	}
 }
 

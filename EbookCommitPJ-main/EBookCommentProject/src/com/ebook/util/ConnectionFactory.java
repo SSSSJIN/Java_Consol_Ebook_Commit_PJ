@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class ConnectionFactory {
 
-	public Connection getConnection()  {
+	public static Connection getConnection()  {
 	
 		Connection conn = null;
 		try {

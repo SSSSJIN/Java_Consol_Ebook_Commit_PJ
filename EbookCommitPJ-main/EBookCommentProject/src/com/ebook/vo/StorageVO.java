@@ -1,66 +1,91 @@
 package com.ebook.vo;
 
+import java.util.Date;
+
 public class StorageVO {
-	
-	private int bookId; // 책 고유 번호 (PK)
-	private String userId;
-	private String title;
-	private String author;
-	private int currentEpisode;
+    private int bookId;
+    private String userId;
+    private String title;
+    private String author;
+    private int currentEpisode;
+    private Date saveDate;
 
-	public StorageVO() {
-	}
+    // 기본 생성자
+    public StorageVO() {
+    }
 
-	public StorageVO(int bookId, String userId, String title, String author, int currentEpisode) {
-		this.bookId = bookId;
-		this.userId = userId;
-		this.title = title;
-		this.author = author;
-		this.currentEpisode = currentEpisode;
-	}
+    // 전체 필드용 생성자
+    public StorageVO(int bookId, String userId, String title, String author, int currentEpisode, Date saveDate) {
+        this.bookId = bookId;
+        this.userId = userId;
+        this.title = title;
+        this.author = author;
+        this.currentEpisode = currentEpisode;
+        this.saveDate = saveDate;
+    }
 
-	public int getBookId() {
-		return bookId;
-	}
+    // 📌 selectByUser 전용 생성자 (saveDate 제외)
+    public StorageVO(int bookId, String userId, String title, String author, int currentEpisode) {
+        this.bookId = bookId;
+        this.userId = userId;
+        this.title = title;
+        this.author = author;
+        this.currentEpisode = currentEpisode;
+    }
 
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}
+    // Getter / Setter
+    public int getBookId() {
+        return bookId;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public int getCurrentEpisode() {
-		return currentEpisode;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public void setCurrentEpisode(int currentEpisode) {
-		this.currentEpisode = currentEpisode;
-	}
+    public int getCurrentEpisode() {
+        return currentEpisode;
+    }
 
-	@Override
-	public String toString() {
-		return "[" + bookId + "] " + title + " by " + author + " (현재 " + currentEpisode + "화까지 읽음)";
-	}
+    public void setCurrentEpisode(int currentEpisode) {
+        this.currentEpisode = currentEpisode;
+    }
+
+    public Date getSaveDate() {
+        return saveDate;
+    }
+
+    public void setSaveDate(Date saveDate) {
+        this.saveDate = saveDate;
+    }
+
+    // ✅ toString() 오버라이드 (출력용)
+    @Override
+    public String toString() {
+        return String.format("📘 책 ID: %d | 제목: %s | 작가: %s | 현재 에피소드: %d",
+                bookId, title, author, currentEpisode);
+    }
 }

@@ -83,7 +83,6 @@ public class SearchAllUI extends BaseUI {
 			System.out.println("제목: " + selectedBook.getTitle());
 			System.out.println("저자: " + selectedBook.getAuthor());
 			System.out.println("설명: " + selectedBook.getDescription());
-			// TODO: 댓글 기능 연결 가능 (CommentUI 등)
 		} else {
 			System.out.println("해당 책이 존재하지 않습니다.");
 		}
